@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2186108171641256116}
   - component: {fileID: 7462811828871161432}
+  - component: {fileID: 6197975980702341562}
   m_Layer: 0
   m_Name: pear
   m_TagString: Untagged
@@ -84,3 +85,16 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &6197975980702341562
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2418065060029274299}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a481f4478b7ea47428d7ee73a70a8ff3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  "_card\u0130d": 12
