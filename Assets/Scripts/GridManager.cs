@@ -19,12 +19,12 @@ public class GridManager : MonoBehaviour
     private void Start()
     {
         FillTheGrid();
-        GridManagerEvents?.Invoke(_gridX,_gridY);
     }
 
     private void FillTheGrid()
     {
         PrepareCards();
+        GridManagerEvents?.Invoke(_gridX, _gridY);
 
         int cardCount = 0;
         for(int i =  0; i < _gridX; i++)
