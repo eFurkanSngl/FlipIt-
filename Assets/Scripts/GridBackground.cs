@@ -35,11 +35,11 @@ public class GridBackground : MonoBehaviour
 
     private void UnRegisterEvents()
     {
-        GridManager.GridManagerEvents += AdjustGridbackground;
+        GridManager.GridManagerEvents -= AdjustGridbackground;
     }
 
     private void RegisterEvents()
     {
-        GridManager.GridManagerEvents -= AdjustGridbackground;
+        GridManager.GridManagerEvents += AdjustGridbackground;
     }
 }

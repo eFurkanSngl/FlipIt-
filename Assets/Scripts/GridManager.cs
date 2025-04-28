@@ -19,12 +19,12 @@ public class GridManager : MonoBehaviour
     private void Start()
     {
         FillTheGrid();
+
     }
 
     private void FillTheGrid()
     {
         PrepareCards();
-        GridManagerEvents?.Invoke(_gridX, _gridY);
 
         int cardCount = 0;
         for(int i =  0; i < _gridX; i++)
@@ -44,6 +44,8 @@ public class GridManager : MonoBehaviour
                 sr.sortingOrder = 1;
 
                 cardCount++;
+                GridManagerEvents?.Invoke(_gridX, _gridY);
+
             }
         }
     }
