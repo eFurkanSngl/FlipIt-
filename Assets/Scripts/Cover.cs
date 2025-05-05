@@ -2,7 +2,6 @@ using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using DG.Tweening;
 
 [RequireComponent(typeof(BoxCollider2D))]
 public class Cover : MonoBehaviour
@@ -47,7 +46,7 @@ public class Cover : MonoBehaviour
     private IEnumerator StartOpenRoutine()
     {
         sr.color = Color.clear;
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(1f);
         sr.color = Color.white;
     }
     private void AnimateOpen()
@@ -55,7 +54,7 @@ public class Cover : MonoBehaviour
         Sequence openSeq = DOTween.Sequence();
 
         // Ýlk minik geri çekilme efekti
-        openSeq.Append(transform.DOScale(new Vector3(1.05f, 0.1f, 1f), 0.15f).SetEase(Ease.InQuad));
+        openSeq.Append(transform.DOScale(new Vector3(1.1f, 0.1f, 1f), 0.15f).SetEase(Ease.InQuad));
 
         // Sonra yay gibi geniþleme (kart açýlýyor)
         openSeq.Append(transform.DOScale(new Vector3(1.1f, 1.1f, 1f), 0.25f).SetEase(Ease.OutElastic));

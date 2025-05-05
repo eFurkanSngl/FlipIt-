@@ -1,13 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
+using TMPro;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
-    public static GameManager Instance { get; private set; }
+    [Header("Game Manager Settings")]
     private Cards _firstCard;
     private Cards _secondCard;
     private List<Cards> matchedCards = new List<Cards>();
+    [SerializeField] private GameObject _gameOverPanel;
+    [SerializeField] private TextMeshProUGUI _gameOverScoreText;
+
+    public static GameManager Instance { get; private set; }
+
 
     private void Awake()
     {
@@ -17,10 +25,9 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            Destroy(Instance);
+            Destroy(gameObject);
         }
     }
-
     public void SelectCard(Cards card)
     {
         if(_firstCard == null)
@@ -36,11 +43,15 @@ public class GameManager : MonoBehaviour
 
     private void ResetSelect()
     {
+
         _firstCard = null;
         _secondCard = null; 
     }
     private IEnumerator FindMatch()
     {
+        int amount = 10;
+        int lives = 1;
+
         yield return new WaitForSeconds(0.2f);
         matchedCards.Clear();
 
@@ -51,22 +62,72 @@ public class GameManager : MonoBehaviour
 
             foreach(var destroyCard in matchedCards)
             {
-                Destroy(destroyCard.gameObject);
+                DestroyAnim(destroyCard.gameObject);
+                ScoreEvents.ScoreEvent?.Invoke(amount);
                 Debug.Log("Destroy card");
             }
         }
         else
         {
             GameEvents.GameEvent?.Invoke();
-
+            ScoreEvents.CurrentLives?.Invoke(lives);
             Debug.Log("Not Matched");
         }
         ResetSelect();
     }
 
-
-    private void DestroyAnim(Cards card)
+    private void GameOver()
     {
+        Debug.Log("Game Over");
+       _gameOverPanel.SetActive(true);
+        _gameOverScoreText.text = "Score: " + ScoreManager.Instance.Score;
+    }
 
+    private void DestroyAnim(GameObject card)
+    {
+        Sequence destroySeq = DOTween.Sequence();  // Animasyonlarý Sýrayla çalýþtýrmak için.
+
+        destroySeq.Append(card.transform.DOShakePosition(0.2f, 0.15f, 10, 90f, false, true));
+        // 0.2f = Süre
+        // 0.15f = Þiddet
+        // 10f = titreme sayýsý
+        // 90f randomness
+        // false yumuþak geçiþ
+        // true  zamanla azalan titreme
+
+        destroySeq.Append(card.transform.DOScale(Vector3.zero, 0.4f).SetEase(Ease.InBack));
+        // Burada Objeyi küçültüyoruz.
+
+        SpriteRenderer sr = card.GetComponent<SpriteRenderer>();
+        if(sr != null)
+        {
+            destroySeq.Join(sr.DOFade(0f, 0.4f));  // Animleri ayný anda çalýþtýr
+        }
+
+        destroySeq.OnComplete(() =>
+        {
+            Destroy(card);
+        });
+        // Anim bitince Destory edecek
+    }
+
+    private void OnEnable()
+    {
+        RegisterEvents();
+    }
+
+    private void OnDisable()
+    {
+        UnRegisterEvents();
+    }
+
+    private void RegisterEvents()
+    {
+        GameOverEvents.GameOverEvent += GameOver;
+    }
+
+    private void UnRegisterEvents()
+    {
+        GameOverEvents.GameOverEvent -= GameOver;
     }
 }

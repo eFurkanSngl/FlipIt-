@@ -27,18 +27,18 @@ public class GridManager : MonoBehaviour
         PrepareCards();
 
         int cardCount = 0;
-        for(int i =  0; i < _gridX; i++)
+        for (int i = 0; i < _gridX; i++)
         {
-            for(int j=0; j < _gridY; j++)
+            for (int j = 0; j < _gridY; j++)
             {
-                if(cardCount >= _cards.Count) return;
-                
-                Vector3 pos = new Vector3(transform.position.x + i , transform.position.y +j , transform.position.z);
-                GameObject obj = Instantiate(_cards[cardCount],pos,Quaternion.identity);
+                if (cardCount >= _cards.Count) return;
+
+                Vector3 pos = new Vector3(transform.position.x + i, transform.position.y + j, transform.position.z);
+                GameObject obj = Instantiate(_cards[cardCount], pos, Quaternion.identity);
                 obj.transform.parent = transform;
 
 
-                GameObject cover = Instantiate(_coverPrefabs,pos,Quaternion.identity);
+                GameObject cover = Instantiate(_coverPrefabs, pos, Quaternion.identity);
                 cover.transform.parent = obj.transform;
                 SpriteRenderer sr = cover.GetComponent<SpriteRenderer>();
                 sr.sortingOrder = 1;
@@ -54,9 +54,9 @@ public class GridManager : MonoBehaviour
     {
         _cards.Clear();
         int id = 0;
-        foreach(GameObject card in _prefabs)
+        foreach (GameObject card in _prefabs)
         {
-            for(int i = 0; i < _cardCount; i++)
+            for (int i = 0; i < _cardCount; i++)
             {
                 _cards.Add(card);
             }
@@ -68,7 +68,7 @@ public class GridManager : MonoBehaviour
 
     private void ShuffleCards()
     {
-        for(int i = 0; i < _cards.Count; i++)
+        for (int i = 0; i < _cards.Count; i++)
         {
             int randomIndex = Random.Range(0, _cards.Count);
             (_cards[i], _cards[randomIndex]) = (_cards[randomIndex], _cards[i]);
@@ -77,11 +77,11 @@ public class GridManager : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        for(int i = 0; i < _gridX; i++)
+        for (int i = 0; i < _gridX; i++)
         {
-            for(int j = 0; j < _gridY; j++)
+            for (int j = 0; j < _gridY; j++)
             {
-                Gizmos.DrawWireCube(new Vector3(transform.position.x + i , transform.position.y +j, transform.position.z), new Vector3(1,1,1));
+                Gizmos.DrawWireCube(new Vector3(transform.position.x + i, transform.position.y + j, transform.position.z), new Vector3(1, 1, 1));
             }
         }
     }
