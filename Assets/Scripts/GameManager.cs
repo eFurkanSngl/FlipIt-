@@ -11,8 +11,14 @@ public class GameManager : MonoBehaviour
     private Cards _firstCard;
     private Cards _secondCard;
     private List<Cards> matchedCards = new List<Cards>();
+
+    [Header("Game Over Panel Settings")]
     [SerializeField] private GameObject _gameOverPanel;
     [SerializeField] private TextMeshProUGUI _gameOverScoreText;
+    [SerializeField] private RectTransform _gameOverPanelTransform;
+    [SerializeField] private float  _middlePos;
+    [SerializeField] private float _tweenDuration;
+    [SerializeField] private CanvasGroup _canvasGroup;
 
     public static GameManager Instance { get; private set; }
 
@@ -81,6 +87,13 @@ public class GameManager : MonoBehaviour
         Debug.Log("Game Over");
        _gameOverPanel.SetActive(true);
         _gameOverScoreText.text = "Score: " + ScoreManager.Instance.Score;
+        GameOverPanelIntro();
+    }
+
+    private void GameOverPanelIntro()
+    {
+        _canvasGroup.DOFade(1, _tweenDuration).SetUpdate(true);
+        _gameOverPanelTransform.DOAnchorPosX(_middlePos, _tweenDuration).SetUpdate(true);
     }
 
     private void DestroyAnim(GameObject card)
