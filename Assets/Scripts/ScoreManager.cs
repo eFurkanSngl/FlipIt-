@@ -31,7 +31,7 @@ public class ScoreManager : MonoBehaviour
     {
         ResetScoreAndCurrentLives();
     }
-    private void ResetScoreAndCurrentLives()
+    public void ResetScoreAndCurrentLives()
     {
         _score = 0;
         _currentLives = 10;

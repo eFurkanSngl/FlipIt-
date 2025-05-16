@@ -15,13 +15,38 @@ public class GridManager : MonoBehaviour
     [SerializeField] private int _cardCount = 6;
 
     private List<GameObject> _cards = new List<GameObject>();
+
     public static event UnityAction<int, int> GridManagerEvents;
+    public int TotalCardCount { get; private set; }
+    public static GridManager Instance { get; private set; }
+
+    private void Awake()
+    {
+        if(Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(Instance.gameObject);
+        }
+    }
+
     private void Start()
     {
         FillTheGrid();
 
     }
-
+    
+    private void GenerateNewCard()
+    {
+        foreach (Transform child in transform)
+        {
+            Destroy(child.gameObject);
+        }
+        FillTheGrid();
+    }
+    
     private void FillTheGrid()
     {
         PrepareCards();
@@ -63,6 +88,8 @@ public class GridManager : MonoBehaviour
             id++;
         }
 
+        TotalCardCount = _cards.Count;
+
         ShuffleCards();
     }
 
@@ -84,5 +111,25 @@ public class GridManager : MonoBehaviour
                 Gizmos.DrawWireCube(new Vector3(transform.position.x + i, transform.position.y + j, transform.position.z), new Vector3(1, 1, 1));
             }
         }
+    }
+
+    private void OnEnable()
+    {
+        RegisterEvents();
+    }
+
+    private void OnDisable()
+    {
+        UnRegisterEvents();
+    }
+
+    private void RegisterEvents()
+    {
+        RestartButtonEvents.ResetEvents += GenerateNewCard;
+    }
+
+    private void UnRegisterEvents()
+    {
+        RestartButtonEvents.ResetEvents -= GenerateNewCard;
     }
 }

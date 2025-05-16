@@ -20,6 +20,15 @@ public class GameManager : MonoBehaviour
     [SerializeField] private float _tweenDuration;
     [SerializeField] private CanvasGroup _canvasGroup;
 
+    [Header("Next Level Panel Settings")]
+    [SerializeField] private GameObject _nextLevelPanel;
+    [SerializeField] private TextMeshProUGUI _nextLevelScoreText;
+    [SerializeField] private RectTransform _nextLevelPanelTransform;
+
+
+    private GameObject[,] _cardList;
+    private int matchedCardCount = 0;
+    private int matchedIncrease = 2;
     public static GameManager Instance { get; private set; }
 
 
@@ -47,17 +56,25 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    private void RestartButton()
+    {
+        RestartButtonEvents.ResetEvents?.Invoke();
+        _gameOverPanel.SetActive(false);
+        _nextLevelPanel.SetActive(false);
+        ScoreManager.Instance.ResetScoreAndCurrentLives();
+        Debug.Log("Restart Game");
+    }
     private void ResetSelect()
     {
 
         _firstCard = null;
         _secondCard = null; 
     }
+
     private IEnumerator FindMatch()
     {
         int amount = 10;
         int lives = 1;
-
         yield return new WaitForSeconds(0.2f);
         matchedCards.Clear();
 
@@ -65,21 +82,47 @@ public class GameManager : MonoBehaviour
         {
             matchedCards.Add(_firstCard);
             matchedCards.Add(_secondCard);
+            matchedCardCount += 2;
 
-            foreach(var destroyCard in matchedCards)
+
+            foreach (var destroyCard in matchedCards)
             {
                 DestroyAnim(destroyCard.gameObject);
                 ScoreEvents.ScoreEvent?.Invoke(amount);
                 Debug.Log("Destroy card");
+                Debug.Log("card count" + matchedCardCount);
             }
+
+            if(matchedCardCount >= GridManager.Instance.TotalCardCount)
+            {
+                Debug.Log("Next Level Panel is Open");
+                yield return new WaitForSeconds(0.4f);
+                NextLevelPanel();
+            } 
         }
         else
         {
             GameEvents.GameEvent?.Invoke();
             ScoreEvents.CurrentLives?.Invoke(lives);
             Debug.Log("Not Matched");
+            NotMacthedAnim(_firstCard);
+            NotMacthedAnim(_secondCard);
+            yield return new WaitForSeconds(0.1f);
         }
         ResetSelect();
+    }
+    private void NextLevelPanel()
+    {
+        Debug.Log("Next Level");
+        _nextLevelPanel.SetActive(true);
+        _nextLevelScoreText.text = "Score: " + ScoreManager.Instance.Score;
+        NextLevelPanelIntro();
+    }
+
+    private void NextLevelPanelIntro()
+    {
+        _canvasGroup.DOFade(1, _tweenDuration).SetUpdate(true);
+        _gameOverPanelTransform.DOAnchorPosX(_middlePos, _tweenDuration).SetUpdate(true);
     }
 
     private void GameOver()
@@ -95,6 +138,13 @@ public class GameManager : MonoBehaviour
         _canvasGroup.DOFade(1, _tweenDuration).SetUpdate(true);
         _gameOverPanelTransform.DOAnchorPosX(_middlePos, _tweenDuration).SetUpdate(true);
     }
+    private void NotMacthedAnim(Cards cardOne)
+    {
+        Sequence notMatchedSeq = DOTween.Sequence();
+        notMatchedSeq.Append(cardOne.transform.DOShakePosition(0.2f, 0.15f, 10, 90f, false, true));
+        
+    }
+
 
     private void DestroyAnim(GameObject card)
     {
@@ -137,10 +187,12 @@ public class GameManager : MonoBehaviour
     private void RegisterEvents()
     {
         GameOverEvents.GameOverEvent += GameOver;
+        RestartButtonEvents.RestartEvents += RestartButton;
     }
 
     private void UnRegisterEvents()
     {
         GameOverEvents.GameOverEvent -= GameOver;
+        RestartButtonEvents.RestartEvents -= RestartButton;
     }
 }
