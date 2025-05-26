@@ -46,7 +46,7 @@ public class Cover : MonoBehaviour
     private IEnumerator StartOpenRoutine()
     {
         sr.color = Color.clear;
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(1.3f);
         sr.color = Color.white;
     }
     private void AnimateOpen()
@@ -70,6 +70,10 @@ public class Cover : MonoBehaviour
         closeSeq.Append(transform.DOScale(1.1f, 0.2f).SetEase(Ease.OutBack));
     }
 
+    private void AllOpenCards()
+    {
+        StartCoroutine(StartOpenRoutine());
+    }
 
     private void ResetCover()
     {
@@ -95,10 +99,12 @@ public class Cover : MonoBehaviour
     private void RegisterEvents()
     {
         GameEvents.GameEvent += ResetCover;
+        GameEvents.PowerUpEvents += AllOpenCards;
     }
 
     private void UnRegisterEvents()
     {
         GameEvents.GameEvent -= ResetCover;
+        GameEvents.PowerUpEvents -= AllOpenCards;
     }
 }

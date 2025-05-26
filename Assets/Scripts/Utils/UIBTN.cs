@@ -8,7 +8,7 @@ using UnityEngine.UI;
 
 public abstract class UIBTN : EventListenerMono
 {
-    [SerializeField] private Button _button;
+    [SerializeField] protected Button _button;
 
     protected abstract void OnClick();
   
