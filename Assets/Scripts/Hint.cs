@@ -1,28 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
 
-public class Shuffle : PowerUps
+public class Hint : PowerUps
 {
     protected override void OnClick()
     {
-        StartCoroutine(ShuffleRoutine());
+        StartCoroutine(ShowHintRoutine());
     }
 
-    private IEnumerator ShuffleRoutine()
+    private IEnumerator ShowHintRoutine()
     {
         _currentLives--;
         UpdateText();
-
-        PowerUpEvents.ShuffleEvents?.Invoke(); 
-        PowerUpEvents.PowerUpEvent?.Invoke();
-
-        if (_currentLives <= 0)
+        PowerUpEvents.ShowHintEvents?.Invoke();
+        if (_currentLives >= 0)
         {
             _button.interactable = false;
         }
-
         yield return _wait;
     }
 }

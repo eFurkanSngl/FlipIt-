@@ -8,6 +8,8 @@ public class Cover : MonoBehaviour
 {
     private SpriteRenderer sr;
     private bool _isOpen = false;
+    public bool IsOpen => _isOpen;
+
     private bool _isInteractable = true;
     private void Start()
     {
@@ -99,12 +101,12 @@ public class Cover : MonoBehaviour
     private void RegisterEvents()
     {
         GameEvents.GameEvent += ResetCover;
-        GameEvents.PowerUpEvents += AllOpenCards;
+        PowerUpEvents.PowerUpEvent += AllOpenCards;
     }
 
     private void UnRegisterEvents()
     {
         GameEvents.GameEvent -= ResetCover;
-        GameEvents.PowerUpEvents -= AllOpenCards;
+        PowerUpEvents.PowerUpEvent -= AllOpenCards;
     }
 }

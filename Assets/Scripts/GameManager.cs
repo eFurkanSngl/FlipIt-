@@ -4,6 +4,7 @@ using UnityEngine;
 using DG.Tweening;
 using TMPro;
 using UnityEngine.UI;
+using UnityEngine.Events;
 
 public class GameManager : MonoBehaviour
 {
@@ -26,11 +27,12 @@ public class GameManager : MonoBehaviour
     [SerializeField] private RectTransform _nextLevelPanelTransform;
 
 
+
     private GameObject[,] _cardList;
     private int matchedCardCount = 0;
     private int matchedIncrease = 2;
     public static GameManager Instance { get; private set; }
-
+    public static event UnityAction GameManagerEvents;
 
     private void Awake()
     {
@@ -63,6 +65,9 @@ public class GameManager : MonoBehaviour
         _nextLevelPanel.SetActive(false);
         ScoreManager.Instance.ResetScoreAndCurrentLives();
         Debug.Log("Restart Game");
+        GameManager.GameManagerEvents?.Invoke();
+        matchedCards.Clear();
+        matchedCardCount = 0;
     }
     private void ResetSelect()
     {
@@ -122,7 +127,7 @@ public class GameManager : MonoBehaviour
     private void NextLevelPanelIntro()
     {
         _canvasGroup.DOFade(1, _tweenDuration).SetUpdate(true);
-        _gameOverPanelTransform.DOAnchorPosX(_middlePos, _tweenDuration).SetUpdate(true);
+        _nextLevelPanelTransform.DOAnchorPosX(_middlePos, _tweenDuration).SetUpdate(true);
     }
 
     private void GameOver()

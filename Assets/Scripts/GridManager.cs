@@ -20,6 +20,7 @@ public class GridManager : MonoBehaviour
     private List<Cards> _cardList = new List<Cards>();
     private List<Vector3> _posList = new List<Vector3>();
     private List<Cards> _allCards = new List<Cards>();
+    private List<Cards> _closedCards = new List<Cards>();
 
     public static event UnityAction<int, int> GridManagerEvents;
     public int TotalCardCount { get; private set; }
@@ -40,6 +41,46 @@ public class GridManager : MonoBehaviour
     private void Start()
     {
         FillTheGrid();
+
+    }
+
+    private void ShowHint()
+    {
+        foreach(Cards card in _allCards)
+        {
+            Cover cover = card.GetComponentInChildren<Cover>();
+            if(cover != null && !cover.IsOpen)
+            {
+                _closedCards.Add(card);
+            }
+        }
+
+        List<int> randomID = new List<int>();
+        foreach(var card in _allCards)
+        {
+            if (!randomID.Contains(card.cardId))
+            {
+                randomID.Add(card.cardId);
+            }
+        }
+
+        int randomIndex = randomID[Random.Range(0,randomID.Count)];
+
+        List<Cards> findMatchId = new List<Cards>();
+        foreach(var card in _closedCards)
+        {
+            if (card.cardId == randomIndex)
+                findMatchId.Add(card);
+            if(findMatchId.Count == 2)
+            {
+                break;
+            }
+        }
+
+        foreach (var Cards in findMatchId)
+        {
+            Cards.transform.DOShakePosition(0.5f, 0.2f, 10);
+        }
 
     }
 
@@ -176,12 +217,14 @@ public class GridManager : MonoBehaviour
     private void RegisterEvents()
     {
         RestartButtonEvents.ResetEvents += GenerateNewCard;
-        GameEvents.ShuffleEvents += ShuffleInGrid;
+        PowerUpEvents.ShuffleEvents += ShuffleInGrid;
+        PowerUpEvents.ShowHintEvents += ShowHint;
     }
 
     private void UnRegisterEvents()
     {
         RestartButtonEvents.ResetEvents -= GenerateNewCard;
-        GameEvents.ShuffleEvents -= ShuffleInGrid;
+        PowerUpEvents.ShuffleEvents -= ShuffleInGrid;
+        PowerUpEvents.ShowHintEvents -= ShowHint;
     }
 }

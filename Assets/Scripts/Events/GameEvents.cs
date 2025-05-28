@@ -10,6 +10,5 @@ using UnityEngine.Events;
 public class GameEvents : MonoBehaviour
 {
     public static UnityAction GameEvent;
-    public static UnityAction PowerUpEvents;
-    public static UnityAction ShuffleEvents;
+
 }
