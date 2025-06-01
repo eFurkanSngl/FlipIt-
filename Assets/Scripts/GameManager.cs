@@ -26,9 +26,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _nextLevelScoreText;
     [SerializeField] private RectTransform _nextLevelPanelTransform;
 
+    [SerializeField] private GameObject _pausePanel;
 
-
-    private GameObject[,] _cardList;
+    private WaitForSeconds _waitTime = new WaitForSeconds(0.1f);
     private int matchedCardCount = 0;
     private int matchedIncrease = 2;
     public static GameManager Instance { get; private set; }
@@ -68,6 +68,7 @@ public class GameManager : MonoBehaviour
         GameManager.GameManagerEvents?.Invoke();
         matchedCards.Clear();
         matchedCardCount = 0;
+        ExitButtonEvents.ExitButtonEvent?.Invoke();
     }
     private void ResetSelect()
     {
@@ -80,7 +81,7 @@ public class GameManager : MonoBehaviour
     {
         int amount = 10;
         int lives = 1;
-        yield return new WaitForSeconds(0.2f);
+        yield return _waitTime;
         matchedCards.Clear();
 
         if(_firstCard.cardId == _secondCard.cardId)
@@ -96,12 +97,14 @@ public class GameManager : MonoBehaviour
                 ScoreEvents.ScoreEvent?.Invoke(amount);
                 Debug.Log("Destroy card");
                 Debug.Log("card count" + matchedCardCount);
+                GridManager.Instance._allCards.Remove(destroyCard);
+
             }
 
-            if(matchedCardCount >= GridManager.Instance.TotalCardCount)
+            if (matchedCardCount >= GridManager.Instance.TotalCardCount)
             {
                 Debug.Log("Next Level Panel is Open");
-                yield return new WaitForSeconds(0.4f);
+                yield return _waitTime;
                 NextLevelPanel();
             } 
         }
@@ -112,7 +115,7 @@ public class GameManager : MonoBehaviour
             Debug.Log("Not Matched");
             NotMacthedAnim(_firstCard);
             NotMacthedAnim(_secondCard);
-            yield return new WaitForSeconds(0.1f);
+            yield return _waitTime;
         }
         ResetSelect();
     }

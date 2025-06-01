@@ -19,7 +19,7 @@ public class GridManager : MonoBehaviour
 
     private List<Cards> _cardList = new List<Cards>();
     private List<Vector3> _posList = new List<Vector3>();
-    private List<Cards> _allCards = new List<Cards>();
+    public List<Cards> _allCards = new List<Cards>();
     private List<Cards> _closedCards = new List<Cards>();
 
     public static event UnityAction<int, int> GridManagerEvents;
@@ -46,6 +46,7 @@ public class GridManager : MonoBehaviour
 
     private void ShowHint()
     {
+        _closedCards.Clear();
         foreach(Cards card in _allCards)
         {
             Cover cover = card.GetComponentInChildren<Cover>();
@@ -124,7 +125,9 @@ public class GridManager : MonoBehaviour
 
         for(int i = 0; i< _cardList.Count;i++)
         {
-            _cardList[i].transform.position = _posList[i];
+            Vector3 targetPos = _posList[i];
+            //_cardList[i].transform.position = _posList[i];
+            _cardList[i].transform.DOMove(targetPos, 0.35f).SetEase(Ease.InOutBack);
         }
     }
     
