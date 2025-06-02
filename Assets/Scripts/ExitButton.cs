@@ -1,28 +1,45 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class ExitButton : UIBTN
+public class ExitButton : MonoBehaviour
 {
-    protected override void OnClick()
+    [SerializeField] private Button _button;
+    private void OnClick()
     {
-        ClosedPanel();
+        StartCoroutine(ClosedPanelRoutine());
     }
 
+    private IEnumerator ClosedPanelRoutine()
+    {
+        ClosedPanel();
+        yield return new WaitForSeconds(0.2f);
+    }
     private void ClosedPanel()
     {
         PausePanelEvents.PausePanelEvent?.Invoke();
     }
 
-    protected override void RegisterEvents()
+    private void RegisterEvents()
     {
-        base.RegisterEvents();
         ExitButtonEvents.ExitButtonEvent += ClosedPanel;
+        _button.onClick.AddListener(OnClick);
     }
 
-    protected override void UnRegisterEvents()
+    private void UnRegisterEvents()
     {
-        base.UnRegisterEvents();
         ExitButtonEvents.ExitButtonEvent -= ClosedPanel;
+        _button.onClick.RemoveListener(OnClick);
+    }
+
+    private void OnEnable()
+    {
+        RegisterEvents();
+    }
+
+    private void OnDisable()
+    {
+        UnRegisterEvents();
     }
 }

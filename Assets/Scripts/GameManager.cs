@@ -95,6 +95,7 @@ public class GameManager : MonoBehaviour
             {
                 DestroyAnim(destroyCard.gameObject);
                 ScoreEvents.ScoreEvent?.Invoke(amount);
+                ConffettiParticle(destroyCard);
                 Debug.Log("Destroy card");
                 Debug.Log("card count" + matchedCardCount);
                 GridManager.Instance._allCards.Remove(destroyCard);
@@ -119,6 +120,22 @@ public class GameManager : MonoBehaviour
         }
         ResetSelect();
     }
+    private void ConffettiParticle(Cards card)
+    {
+        GameObject effect = ParticlePool.Instance.GetParticlePool();
+
+        ParticleSystem ps = effect.GetComponent<ParticleSystem>();
+        if(ps != null)
+        {
+            ps.Play();
+            StartCoroutine(RetunParticlePool(effect,0.4f));
+        }
+    }
+    private IEnumerator RetunParticlePool(GameObject obj , float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        ParticlePool.Instance.ReturnParticlePool(obj);
+    }
     private void NextLevelPanel()
     {
         Debug.Log("Next Level");
@@ -130,7 +147,7 @@ public class GameManager : MonoBehaviour
     private void NextLevelPanelIntro()
     {
         _canvasGroup.DOFade(1, _tweenDuration).SetUpdate(true);
-        _nextLevelPanelTransform.DOAnchorPosX(_middlePos, _tweenDuration).SetUpdate(true);
+        _nextLevelPanelTransform.DOAnchorPosX(-210, _tweenDuration).SetUpdate(true);
     }
 
     private void GameOver()

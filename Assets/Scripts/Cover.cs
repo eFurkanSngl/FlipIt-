@@ -62,14 +62,16 @@ public class Cover : MonoBehaviour
         openSeq.Append(transform.DOScale(new Vector3(1.1f, 1.1f, 1f), 0.25f).SetEase(Ease.OutElastic));
 
         // Son olarak normal boyuta geri dön
-        openSeq.Append(transform.DOScale(1.1f, 0.11f).SetEase(Ease.OutSine));
+        openSeq.Append(transform.DOScale(1.1f, 0.2f).SetEase(Ease.OutSine));
     }
     public void AnimateClose()
     {
         Sequence closeSeq = DOTween.Sequence();
 
-        closeSeq.Append(transform.DOScale(new Vector3(1.05f, 0.1f, 1f), 0.2f).SetEase(Ease.InOutCubic));
-        closeSeq.Append(transform.DOScale(1.1f, 0.2f).SetEase(Ease.OutBack));
+        closeSeq.Append(transform.DOScale(new Vector3(1f, 1f, 1f), 0.2f).SetEase(Ease.OutBack));
+        closeSeq.Append(transform.DOScale(new Vector3(1f, 1f, 1f), 0.2f).SetEase(Ease.OutBack));
+
+        //closeSeq.Append(transform.DOScale(new Vector3(1.02f, 0.1f,1f),0.2f).SetEase(Ease.OutBack));
     }
 
     private void AllOpenCards()

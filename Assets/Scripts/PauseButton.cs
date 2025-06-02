@@ -35,13 +35,15 @@ public class PauseButton : UIBTN
 
     }
 
-    private void RegisterEvents()
+    protected override void RegisterEvents()
     {
+        base.RegisterEvents();
         PausePanelEvents.PausePanelEvent += PausePanelOutro;
     }
 
-    private void UnRegisterEvents()
+    protected override void UnRegisterEvents()
     {
+        base.UnRegisterEvents();
         PausePanelEvents.PausePanelEvent -= PausePanelOutro;
     }
 
