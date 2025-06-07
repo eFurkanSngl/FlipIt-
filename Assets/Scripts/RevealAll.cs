@@ -4,7 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class RevalAllBtn : PowerUps
+public class RevealAll : PowerUps
 {
    
     protected override void OnClick()

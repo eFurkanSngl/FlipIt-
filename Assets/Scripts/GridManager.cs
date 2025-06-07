@@ -14,6 +14,7 @@ public class GridManager : MonoBehaviour
     [SerializeField] private GameObject[] _prefabs;
     [SerializeField] private GameObject _coverPrefabs;
     [SerializeField] private int _cardCount = 6;
+    [SerializeField] private LevelData _levelData;
 
     private List<GameObject> _cards = new List<GameObject>();
 
@@ -145,27 +146,30 @@ public class GridManager : MonoBehaviour
         PrepareCards();
         _allCards.Clear();
         int cardCount = 0;
-        for (int i = 0; i < _gridX; i++)
+        
+        foreach(Vector2Int cellPos in _levelData.activeCells )
+        //for (int i = 0; i < _gridX; i++)
         {
-            for (int j = 0; j < _gridY; j++)
-            {
+            //for (int j = 0; j < _gridY; j++)
+            //{
                 if (cardCount >= _cards.Count) return;
 
-                Vector3 pos = new Vector3(transform.position.x + i, transform.position.y + j, transform.position.z);
+                Vector3 pos = new Vector3(transform.position.x + cellPos.x, transform.position.y + cellPos.y, transform.position.z);
                 GameObject obj = Instantiate(_cards[cardCount], pos, Quaternion.identity);
                 obj.transform.parent = transform;
+                obj.transform.localScale = new Vector3(0.1f,0.1f,0.1f);
                 Cards card = obj.GetComponent<Cards>();
                 _allCards.Add(card);
 
                 GameObject cover = Instantiate(_coverPrefabs, pos, Quaternion.identity);
                 cover.transform.parent = obj.transform;
+                cover.transform.localScale = new Vector3(1.1f, 1.1f, 1.1f);
                 SpriteRenderer sr = cover.GetComponent<SpriteRenderer>();
                 sr.sortingOrder = 1;
+            GridManagerEvents?.Invoke(_gridX, _gridY);
 
-                cardCount++;
-                GridManagerEvents?.Invoke(_gridX, _gridY);
-
-            }
+            cardCount++;
+            //}
         }
     }
 
@@ -180,9 +184,11 @@ public class GridManager : MonoBehaviour
                 _cards.Add(card);
             }
             id++;
+            Debug.Log("id" + id);
         }
 
         TotalCardCount = _cards.Count;
+        Debug.Log("Card Count:" + TotalCardCount);
 
         ShuffleCards();
     }

@@ -41,9 +41,11 @@ public class Cover : MonoBehaviour
     {
         yield return new WaitForSeconds(0.2f);
 
+
         sr.color = Color.white;
         _isOpen = false;
         _isInteractable = true;
+
     }
     private IEnumerator StartOpenRoutine()
     {
@@ -56,24 +58,15 @@ public class Cover : MonoBehaviour
         Sequence openSeq = DOTween.Sequence();
 
         // Ýlk minik geri çekilme efekti
-        openSeq.Append(transform.DOScale(new Vector3(1.1f, 0.1f, 1f), 0.15f).SetEase(Ease.InQuad));
+        openSeq.Append(transform.DOScale(new Vector3(1f, 0.1f, 1f), 0.15f).SetEase(Ease.InQuad));
 
         // Sonra yay gibi geniþleme (kart açýlýyor)
-        openSeq.Append(transform.DOScale(new Vector3(1.1f, 1.1f, 1f), 0.25f).SetEase(Ease.OutElastic));
+        openSeq.Append(transform.DOScale(new Vector3(1f, 1.1f, 1f), 0.25f).SetEase(Ease.OutElastic));
 
         // Son olarak normal boyuta geri dön
-        openSeq.Append(transform.DOScale(1.1f, 0.2f).SetEase(Ease.OutSine));
+        openSeq.Append(transform.DOScale(1.115f, 0.2f).SetEase(Ease.OutSine));
     }
-    public void AnimateClose()
-    {
-        Sequence closeSeq = DOTween.Sequence();
-
-        closeSeq.Append(transform.DOScale(new Vector3(1f, 1f, 1f), 0.2f).SetEase(Ease.OutBack));
-        closeSeq.Append(transform.DOScale(new Vector3(1f, 1f, 1f), 0.2f).SetEase(Ease.OutBack));
-
-        //closeSeq.Append(transform.DOScale(new Vector3(1.02f, 0.1f,1f),0.2f).SetEase(Ease.OutBack));
-    }
-
+ 
     private void AllOpenCards()
     {
         StartCoroutine(StartOpenRoutine());
@@ -84,7 +77,6 @@ public class Cover : MonoBehaviour
         if (_isOpen)
         {
             StartCoroutine(CloseCoverRoutine());
-            AnimateClose();
 
         }
      

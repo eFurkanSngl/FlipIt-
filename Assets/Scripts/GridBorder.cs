@@ -45,8 +45,8 @@ public class GridBorder : MonoBehaviour
             right.transform.Rotate(0, 0, 90);
         }
 
-        Debug.Log("baþlangýç poz" + startX);
-        Debug.Log("baþlangýç poz" + startY);
+        Debug.Log("başlangıç poz" + startX);
+        Debug.Log("başlangıç poz" + startY);
 
     }
 

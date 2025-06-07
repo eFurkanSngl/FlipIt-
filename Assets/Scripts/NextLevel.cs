@@ -9,7 +9,6 @@ public class NextLevel : UIBTN
     {
         LoadNextlevel();
         Debug.Log("New Level");
-        _nextLevelPanel.SetActive(false);
     }
 
     private void LoadNextlevel()
