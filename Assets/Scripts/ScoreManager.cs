@@ -11,8 +11,8 @@ public class ScoreManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _scoreText;
     [SerializeField] private TextMeshProUGUI _currentLivesText;
     private int _score = 0;
-    private int _currentLives = 10;
-    public int CurrentLives => _currentLives;
+    [SerializeField] private int _currentLives;
+    [SerializeField] private int _startLives;
     public int Score => _score;
 
     private void Awake()
@@ -34,7 +34,7 @@ public class ScoreManager : MonoBehaviour
     public void ResetScoreAndCurrentLives()
     {
         _score = 0;
-        _currentLives = 10;
+        _currentLives = _startLives;
         UpdateScore();
         UpdateCurrentLives();
     }

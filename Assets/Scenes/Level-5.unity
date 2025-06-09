@@ -554,7 +554,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 1
+  m_text: 2
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -818,7 +818,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 1200, y: -100}
+  m_AnchoredPosition: {x: 1200, y: 70}
   m_SizeDelta: {x: 188.77, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &276545798
@@ -6211,7 +6211,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Lives:10
+  m_text: Lives:16
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -7575,7 +7575,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 0, y: 260}
+  m_AnchoredPosition: {x: 30, y: 260}
   m_SizeDelta: {x: 250, y: 250}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &826296022
@@ -8916,7 +8916,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -70, y: 260}
+  m_AnchoredPosition: {x: -30, y: 260}
   m_SizeDelta: {x: 250, y: 250}
   m_Pivot: {x: 1, y: 0}
 --- !u!114 &1253454100
@@ -9016,7 +9016,7 @@ MonoBehaviour:
   _button: {fileID: 1253454100}
   _currentLiveText: {fileID: 156137477}
   _currentLives: 0
-  _maxLives: 1
+  _maxLives: 2
 --- !u!1 &1340249943
 GameObject:
   m_ObjectHideFlags: 0
@@ -9056,7 +9056,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 80, y: 260}
+  m_AnchoredPosition: {x: 110, y: 260}
   m_SizeDelta: {x: 250, y: 250}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &1340249945
@@ -9156,7 +9156,7 @@ MonoBehaviour:
   _button: {fileID: 1340249945}
   _currentLiveText: {fileID: 1523806430}
   _currentLives: 0
-  _maxLives: 1
+  _maxLives: 2
 --- !u!1 &1342361924
 GameObject:
   m_ObjectHideFlags: 0
@@ -9542,7 +9542,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 1
+  m_text: 2
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -10113,6 +10113,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _scoreText: {fileID: 730687804}
   _currentLivesText: {fileID: 566116088}
+  _currentLives: 16
 --- !u!4 &1762515554
 Transform:
   m_ObjectHideFlags: 0
@@ -10564,7 +10565,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _padding: 0.5
-  _offsetY: 1.55
+  _offsetY: 1.65
   _offsetX: 2
 --- !u!4 &1855595040
 Transform:
@@ -10892,18 +10893,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2291e534c57b80449e2a74bfef98a0c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _gridX: 7
-  _gridY: 7
+  _gridX: 10
+  _gridY: 10
   _prefabs:
   - {fileID: 7288656859481172290, guid: 5bd763075c40495429fb0a3b945d2fcf, type: 3}
   - {fileID: 3806984358939739464, guid: d4d3ba59c96debf46900b3534f8f82fd, type: 3}
   - {fileID: 2862050354690304611, guid: f181f457a7278004d84a924a2d975c9b, type: 3}
   - {fileID: 2087254085801931075, guid: 842b6e605626118498a19f845354b99b, type: 3}
   - {fileID: 715665805508209154, guid: 96b73e5d909e43245b70e36852af77d8, type: 3}
+  - {fileID: 918707661396421837, guid: cadbdf29e7af95544a88c71967154b13, type: 3}
+  - {fileID: 1584468023509284568, guid: c19450f2f42e0b7439cc01a256c5b717, type: 3}
+  - {fileID: 5201477710775106194, guid: c046b3d7ec9d1e240af985a6f5881d63, type: 3}
+  - {fileID: 3135725568506523694, guid: 51aa66dbbd6ee26408b21159cd85f0d0, type: 3}
   - {fileID: 8979183180944557470, guid: 2bc0df8fce5142540a0d4594e7da6022, type: 3}
-  - {fileID: 8979183180944557470, guid: 2bc0df8fce5142540a0d4594e7da6022, type: 3}
-  _coverPrefabs: {fileID: 5864015207232558673, guid: 573c38a358ee5c245966135745a45c1e, type: 3}
-  _cardCount: 7
+  _coverPrefabs: {fileID: 7845023143469299797, guid: 4fdb6dc78aa0c334fb91eef18329f910, type: 3}
+  _cardCount: 10
   _allCards: []
 --- !u!4 &1991266980
 Transform:

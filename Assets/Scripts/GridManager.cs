@@ -14,7 +14,6 @@ public class GridManager : MonoBehaviour
     [SerializeField] private GameObject[] _prefabs;
     [SerializeField] private GameObject _coverPrefabs;
     [SerializeField] private int _cardCount = 6;
-    [SerializeField] private LevelData _levelData;
 
     private List<GameObject> _cards = new List<GameObject>();
 
@@ -42,6 +41,7 @@ public class GridManager : MonoBehaviour
     private void Start()
     {
         FillTheGrid();
+        GridManagerEvents?.Invoke(_gridX, _gridY);
 
     }
 
@@ -147,14 +147,13 @@ public class GridManager : MonoBehaviour
         _allCards.Clear();
         int cardCount = 0;
         
-        foreach(Vector2Int cellPos in _levelData.activeCells )
-        //for (int i = 0; i < _gridX; i++)
+        for (int i = 0; i < _gridX; i++)
         {
-            //for (int j = 0; j < _gridY; j++)
-            //{
+            for (int j = 0; j < _gridY; j++)
+            {
                 if (cardCount >= _cards.Count) return;
 
-                Vector3 pos = new Vector3(transform.position.x + cellPos.x, transform.position.y + cellPos.y, transform.position.z);
+                Vector3 pos = new Vector3(transform.position.x + i, transform.position.y + j, transform.position.z);
                 GameObject obj = Instantiate(_cards[cardCount], pos, Quaternion.identity);
                 obj.transform.parent = transform;
                 obj.transform.localScale = new Vector3(0.1f,0.1f,0.1f);
@@ -166,10 +165,9 @@ public class GridManager : MonoBehaviour
                 cover.transform.localScale = new Vector3(1.1f, 1.1f, 1.1f);
                 SpriteRenderer sr = cover.GetComponent<SpriteRenderer>();
                 sr.sortingOrder = 1;
-            GridManagerEvents?.Invoke(_gridX, _gridY);
 
-            cardCount++;
-            //}
+                 cardCount++;
+            }
         }
     }
 

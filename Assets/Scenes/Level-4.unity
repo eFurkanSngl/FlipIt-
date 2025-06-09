@@ -6211,7 +6211,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Lives:12
+  m_text: Lives:15
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -9156,7 +9156,7 @@ MonoBehaviour:
   _button: {fileID: 1340249945}
   _currentLiveText: {fileID: 1523806430}
   _currentLives: 0
-  _maxLives: 1
+  _maxLives: 2
 --- !u!1 &1342361924
 GameObject:
   m_ObjectHideFlags: 0
@@ -9542,7 +9542,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 1
+  m_text: 2
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -10113,6 +10113,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _scoreText: {fileID: 730687804}
   _currentLivesText: {fileID: 566116088}
+  _currentLives: 0
 --- !u!4 &1762515554
 Transform:
   m_ObjectHideFlags: 0
@@ -10564,7 +10565,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _padding: 0.5
-  _offsetY: 1.6
+  _offsetY: 1.62
   _offsetX: 2
 --- !u!4 &1855595040
 Transform:
@@ -10892,8 +10893,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2291e534c57b80449e2a74bfef98a0c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _gridX: 8
-  _gridY: 8
+  _gridX: 9
+  _gridY: 9
   _prefabs:
   - {fileID: 3395845762151723803, guid: 85be0c75f0b5a054abdaf351e23c224e, type: 3}
   - {fileID: 3806984358939739464, guid: d4d3ba59c96debf46900b3534f8f82fd, type: 3}
@@ -10903,8 +10904,9 @@ MonoBehaviour:
   - {fileID: 8979183180944557470, guid: 2bc0df8fce5142540a0d4594e7da6022, type: 3}
   - {fileID: 6671086994963790487, guid: 991d1ca9e5a90bb41832b34708eb7d00, type: 3}
   - {fileID: 1584468023509284568, guid: c19450f2f42e0b7439cc01a256c5b717, type: 3}
-  _coverPrefabs: {fileID: 7933965255724868251, guid: ec17536718fd7154b9a3d30b3a7e8b2f, type: 3}
-  _cardCount: 8
+  - {fileID: 7601239231851101599, guid: 486c5e38e9ec4bf4989afee76c80488c, type: 3}
+  _coverPrefabs: {fileID: 6488541311186813574, guid: 58e0d247e72b094458f62ac74ef23a64, type: 3}
+  _cardCount: 9
   _allCards: []
 --- !u!4 &1991266980
 Transform:

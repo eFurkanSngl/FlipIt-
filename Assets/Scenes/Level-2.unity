@@ -6211,7 +6211,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Lives:10
+  m_text: Lives:12
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -8862,6 +8862,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b05aef472690ae549a4f18815933e435, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _levelSelectButton: []
 --- !u!4 &1204638901
 Transform:
   m_ObjectHideFlags: 0
@@ -10113,6 +10114,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _scoreText: {fileID: 730687804}
   _currentLivesText: {fileID: 566116088}
+  _currentLives: 12
+  _startLives: 12
 --- !u!4 &1762515554
 Transform:
   m_ObjectHideFlags: 0
@@ -10564,7 +10567,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _padding: 0.5
-  _offsetY: 1.55
+  _offsetY: 1.6
   _offsetX: 2
 --- !u!4 &1855595040
 Transform:
@@ -10892,8 +10895,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2291e534c57b80449e2a74bfef98a0c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _gridX: 7
-  _gridY: 7
+  _gridX: 8
+  _gridY: 8
   _prefabs:
   - {fileID: 2418065060029274299, guid: 71f1dbe3915258640a2c2c93814d295c, type: 3}
   - {fileID: 918707661396421837, guid: cadbdf29e7af95544a88c71967154b13, type: 3}
@@ -10902,8 +10905,9 @@ MonoBehaviour:
   - {fileID: 715665805508209154, guid: 96b73e5d909e43245b70e36852af77d8, type: 3}
   - {fileID: 8979183180944557470, guid: 2bc0df8fce5142540a0d4594e7da6022, type: 3}
   - {fileID: 2817517561098996581, guid: 50c338ad474007d429ec8207ad538b94, type: 3}
+  - {fileID: 3395845762151723803, guid: 85be0c75f0b5a054abdaf351e23c224e, type: 3}
   _coverPrefabs: {fileID: 3555369703262084385, guid: 82b325628c210c84fb94e62061a6ad0d, type: 3}
-  _cardCount: 7
+  _cardCount: 8
   _allCards: []
 --- !u!4 &1991266980
 Transform:

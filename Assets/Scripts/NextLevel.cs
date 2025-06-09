@@ -1,10 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class NextLevel : UIBTN
 {
-    [SerializeField] private GameObject _nextLevelPanel;
     protected override void OnClick()
     {
         LoadNextlevel();
@@ -13,6 +13,7 @@ public class NextLevel : UIBTN
 
     private void LoadNextlevel()
     {
-        LevelManager.Instance.LoadNextLevel();
+        SceneManager.LoadScene("Level-Select");
+
     }
 }

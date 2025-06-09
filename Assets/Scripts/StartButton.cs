@@ -12,6 +12,7 @@ public class StartButton : UIBTN
 
     private void OnLoadScene()
     {
-        SceneManager.LoadScene("Level-1");
+        SceneManager.LoadScene("Level-Select");
+
     }
 }

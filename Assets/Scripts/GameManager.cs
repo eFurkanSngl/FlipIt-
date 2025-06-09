@@ -44,6 +44,7 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
     }
     public void SelectCard(Cards card)
     {
@@ -107,7 +108,8 @@ public class GameManager : MonoBehaviour
                 Debug.Log("Next Level Panel is Open");
                 yield return _waitTime;
                 NextLevelPanel();
-            } 
+                LevelManager.Instance.UnLockNextLevel();
+            }
         }
         else
         {
