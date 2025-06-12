@@ -10,5 +10,6 @@ using UnityEngine.Events;
 public class GameEvents : MonoBehaviour
 {
     public static UnityAction GameEvent;
+    public static UnityAction MultiScoreEvents;
 
 }

@@ -18,7 +18,7 @@ public class RevealAll : PowerUps
 
         PowerUpEvents.PowerUpEvent?.Invoke();
         yield return _wait;
-        if (_currentLives >= 0)
+        if (_currentLives == 0)
         {
             _button.interactable = false;
             Debug.Log("is click");

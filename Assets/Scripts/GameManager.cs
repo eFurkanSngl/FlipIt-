@@ -107,8 +107,13 @@ public class GameManager : MonoBehaviour
             {
                 Debug.Log("Next Level Panel is Open");
                 yield return _waitTime;
-                NextLevelPanel();
-                LevelManager.Instance.UnLockNextLevel();
+                MultiScore.Instance.StartBonusScoring(() =>
+                {
+                    NextLevelPanel();
+                    LevelManager.Instance.UnLockNextLevel();
+
+                });
+
             }
         }
         else
@@ -130,7 +135,7 @@ public class GameManager : MonoBehaviour
         if(ps != null)
         {
             ps.Play();
-            StartCoroutine(RetunParticlePool(effect,0.4f));
+            StartCoroutine(RetunParticlePool(effect,2f));
         }
     }
     private IEnumerator RetunParticlePool(GameObject obj , float delay)

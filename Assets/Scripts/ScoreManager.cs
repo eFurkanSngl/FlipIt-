@@ -10,10 +10,30 @@ public class ScoreManager : MonoBehaviour
 
     [SerializeField] private TextMeshProUGUI _scoreText;
     [SerializeField] private TextMeshProUGUI _currentLivesText;
-    private int _score = 0;
     [SerializeField] private int _currentLives;
     [SerializeField] private int _startLives;
-    public int Score => _score;
+    public TextMeshProUGUI ScoreText => _scoreText;
+    public TextMeshProUGUI CurrentLivesText => _currentLivesText;
+
+    private int _score = 0;
+
+    public int CurrentLives
+    {
+        get
+        {
+            return _currentLives;
+        }
+        set
+        {
+            _currentLives = value;
+        }
+    }
+    public int Score
+    {
+        get { return _score; }
+
+        set { _score = value; }
+    }
 
     private void Awake()
     {
@@ -55,12 +75,13 @@ public class ScoreManager : MonoBehaviour
     private void DecreaseCurrentLives(int lives)
     {
         _currentLives -= lives;
+
         if(_currentLives <= 0)
         {
             _currentLives = 0;
             GameOverEvents.GameOverEvent?.Invoke();
         }
-        
+
         UpdateCurrentLives();
     }
 
