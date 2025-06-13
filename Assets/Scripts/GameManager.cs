@@ -28,6 +28,15 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private GameObject _pausePanel;
 
+
+    [Header("Sound Effect")]
+    [SerializeField] private AudioSource _findSound;
+    [SerializeField] private AudioSource _succsessSound;
+    [SerializeField] private AudioSource _wrongMatchSound;
+    [SerializeField] private AudioSource _gameOverSound;
+
+
+
     private WaitForSeconds _waitTime = new WaitForSeconds(0.1f);
     private int matchedCardCount = 0;
     private int matchedIncrease = 2;
@@ -97,6 +106,7 @@ public class GameManager : MonoBehaviour
                 DestroyAnim(destroyCard.gameObject);
                 ScoreEvents.ScoreEvent?.Invoke(amount);
                 ConffettiParticle(destroyCard);
+                _findSound.Play();
                 Debug.Log("Destroy card");
                 Debug.Log("card count" + matchedCardCount);
                 GridManager.Instance._allCards.Remove(destroyCard);
@@ -124,6 +134,7 @@ public class GameManager : MonoBehaviour
             NotMacthedAnim(_firstCard);
             NotMacthedAnim(_secondCard);
             yield return _waitTime;
+            _wrongMatchSound.Play();
         }
         ResetSelect();
     }
@@ -149,6 +160,7 @@ public class GameManager : MonoBehaviour
         _nextLevelPanel.SetActive(true);
         _nextLevelScoreText.text = "Score: " + ScoreManager.Instance.Score;
         NextLevelPanelIntro();
+        _succsessSound.Play();
     }
 
     private void NextLevelPanelIntro()
@@ -163,6 +175,7 @@ public class GameManager : MonoBehaviour
        _gameOverPanel.SetActive(true);
         _gameOverScoreText.text = "Score: " + ScoreManager.Instance.Score;
         GameOverPanelIntro();
+        _gameOverSound.Play();
     }
 
     private void GameOverPanelIntro()
