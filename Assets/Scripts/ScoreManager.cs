@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SocialPlatforms.Impl;
 using UnityEngine.UI;
 
 public class ScoreManager : MonoBehaviour
@@ -16,6 +17,8 @@ public class ScoreManager : MonoBehaviour
     public TextMeshProUGUI CurrentLivesText => _currentLivesText;
 
     private int _score = 0;
+    private int _highScore;
+    public int HighScore => _highScore;
 
     public int CurrentLives
     {
@@ -50,6 +53,8 @@ public class ScoreManager : MonoBehaviour
     private void Start()
     {
         ResetScoreAndCurrentLives();
+        _highScore = PlayerPrefs.GetInt("HighScore", 0);
+
     }
     public void ResetScoreAndCurrentLives()
     {
@@ -91,6 +96,15 @@ public class ScoreManager : MonoBehaviour
         {
             _currentLivesText.text = "Lives: " + _currentLives.ToString();
         }
+    }
+    public void SaveHighScore()
+    {
+        if (_score > _highScore)
+        {
+            _highScore = _score;
+            PlayerPrefs.SetInt("HighScore", _highScore);
+        }
+        PlayerPrefs.Save();
     }
     private void OnEnable()
     {

@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class MultiScore : MonoBehaviour
 {
-    [SerializeField] private float _bonusInterval = 1f;
+    private WaitForSeconds _bonusInterval = new WaitForSeconds(0.7f);
     [SerializeField] private int _bonusMoveScore = 5;
     public static MultiScore Instance;
     private void Awake()
@@ -43,10 +43,12 @@ public class MultiScore : MonoBehaviour
 
             ScoreManager.Instance.CurrentLives--;  // her döngüde Livesý azaltýyoruz
             ScoreManager.Instance.CurrentLivesText.text =$"Lives: {ScoreManager.Instance.CurrentLives}";
-            yield return new WaitForSeconds(_bonusInterval); 
+            yield return _bonusInterval; 
         }
         ScoreManager.Instance.CurrentLivesText.text = $"Lives: {ScoreManager.Instance.CurrentLives}";
         ScoreManager.Instance.ScoreText.text =$"Score: {ScoreManager.Instance.Score}";
+        yield return _bonusInterval;
+
         onComplete?.Invoke();
     }
     public void StartBonusScoring(System.Action onComplete)

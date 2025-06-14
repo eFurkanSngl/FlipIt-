@@ -20,12 +20,13 @@ public class GameManager : MonoBehaviour
     [SerializeField] private float  _middlePos;
     [SerializeField] private float _tweenDuration;
     [SerializeField] private CanvasGroup _canvasGroup;
+    [SerializeField] private TextMeshProUGUI _gameOverPanelHighScoreText;
 
     [Header("Next Level Panel Settings")]
     [SerializeField] private GameObject _nextLevelPanel;
     [SerializeField] private TextMeshProUGUI _nextLevelScoreText;
     [SerializeField] private RectTransform _nextLevelPanelTransform;
-
+    [SerializeField] private TextMeshProUGUI _nextLevelPanelHighScoreText;
     [SerializeField] private GameObject _pausePanel;
 
 
@@ -34,6 +35,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private AudioSource _succsessSound;
     [SerializeField] private AudioSource _wrongMatchSound;
     [SerializeField] private AudioSource _gameOverSound;
+    [SerializeField] private AudioSource _mainMusic;
+
 
 
 
@@ -79,6 +82,7 @@ public class GameManager : MonoBehaviour
         matchedCards.Clear();
         matchedCardCount = 0;
         ExitButtonEvents.ExitButtonEvent?.Invoke();
+        _mainMusic.Play();
     }
     private void ResetSelect()
     {
@@ -159,8 +163,12 @@ public class GameManager : MonoBehaviour
         Debug.Log("Next Level");
         _nextLevelPanel.SetActive(true);
         _nextLevelScoreText.text = "Score: " + ScoreManager.Instance.Score;
+        _nextLevelPanelHighScoreText.text = "HighScore: " + ScoreManager.Instance.HighScore;
         NextLevelPanelIntro();
         _succsessSound.Play();
+        _mainMusic.Stop();
+        ScoreManager.Instance.SaveHighScore();
+
     }
 
     private void NextLevelPanelIntro()
@@ -174,8 +182,12 @@ public class GameManager : MonoBehaviour
         Debug.Log("Game Over");
        _gameOverPanel.SetActive(true);
         _gameOverScoreText.text = "Score: " + ScoreManager.Instance.Score;
+        _gameOverPanelHighScoreText.text = "HighScore: " + ScoreManager.Instance.HighScore;
         GameOverPanelIntro();
         _gameOverSound.Play();
+        _mainMusic.Stop();
+        ScoreManager.Instance.SaveHighScore();
+
     }
 
     private void GameOverPanelIntro()
