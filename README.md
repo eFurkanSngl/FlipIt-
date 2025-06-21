@@ -2,7 +2,7 @@
 
 Flip It!, Unity ile geliştirilen mobil tabanlı bir hafıza eşleştirme oyunudur. Oyuncular belirli haklar dahilinde kartları eşleştirerek ilerler. Projede baştan sona tüm geliştirme süreci solo olarak yürütülmüş olup, performans, sürdürülebilirlik ve modüler mimari hedeflenmiştir.
 
-🔧 Technologies Used Unity 2022.3.x (LTS)
+🔧 Kullanılan Teknoloji Unity 2022.3.x (LTS)
 
 
 🧩 Gameplay Özellikleri
